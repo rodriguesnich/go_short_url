@@ -26,7 +26,7 @@ func (s store) SaveShortenedURL(ctx context.Context, _url string) (string, error
 	var code string
 	for range 5 {
 		code = GenCode()
-		if err := s.rdb.HGet(ctx, "encurtador", code).Err(); err != nil {
+		if err := s.rdb.HGet(ctx, "shortner", code).Err(); err != nil {
 			if errors.Is(err, redis.Nil) {
 				break
 			}
@@ -34,7 +34,7 @@ func (s store) SaveShortenedURL(ctx context.Context, _url string) (string, error
 		}
 	}
 
-	if err := s.rdb.HSet(ctx, "encurtador", code, _url).Err(); err != nil {
+	if err := s.rdb.HSet(ctx, "shortner", code, _url).Err(); err != nil {
 		return "", err
 	}
 
@@ -42,10 +42,10 @@ func (s store) SaveShortenedURL(ctx context.Context, _url string) (string, error
 }
 
 func (s store) GetFullURL(ctx context.Context, code string) (string, error) {
-	fullURL, err := s.rdb.HGet(ctx, "encurtador", code).Result()
+	fullURL, err := s.rdb.HGet(ctx, "shortner", code).Result()
 
 	if err != nil {
-		return "", fmt.Errorf("failed to get code from encurtador hashmap: %w", err)
+		return "", fmt.Errorf("failed to get code from shortner hashmap: %w", err)
 	}
 
 	return fullURL, nil
