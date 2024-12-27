@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.4.1-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Adjust if your Dockerfile has a different name or path
+    ports:
+      - 8081:8081  # Expose port 8081
+    restart: always
+
+volumes:
+  redis:
+    driver: local
