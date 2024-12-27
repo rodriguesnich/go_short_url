@@ -1,7 +1,8 @@
 - [x] create api
 - [x] create front
 - [x] add front tests
-- [] containerize go
-    - [ ] config different stages
+- [x] containerize go
+    - [x] config different stages
+- [x] add gen code rule unit test
 - [ ] add api unit tests
-- [ ] organize folders
+- [x] organize folders

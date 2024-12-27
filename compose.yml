@@ -12,7 +12,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile  # Adjust if your Dockerfile has a different name or path
+      dockerfile: Dockerfile
     ports:
       - 8081:8081  # Expose port 8081
     restart: always
